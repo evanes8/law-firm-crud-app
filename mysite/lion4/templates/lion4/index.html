@@ -69,7 +69,7 @@
     <th scope = "col">File Number</th>
     <th scope="col">File Name</th>
     <th scope="col">Code</th>
-    <th scope="col">Client</th>
+    <th scope="col">Clients</th>
   </tr>
 </thead>
     {% for record in page_obj %}
@@ -79,7 +79,7 @@
 	    <td>{{record.matter_no}}</td>
 	    <td><a href="{% url 'detail' record.id %}">{{ record.matter_ref }}</a></td>
 	    <td>{{record.code}}</td>
-	    <td>{{record.client}}</td>
+	    <td>{% for name in record.client_name_set %} {{name}}{% endfor %}</td>
 	   
     </tr>
     </tbody>

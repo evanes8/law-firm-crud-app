@@ -15,7 +15,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     paginate_by=100
     
     def get_queryset(self):
-        return Standard_Record.objects.order_by('-matter_no')
+        return Record.objects.order_by('-matter_no')
 
 
 @login_required(login_url='/lion/accounts/login/')
