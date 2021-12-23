@@ -1,7 +1,8 @@
 from django.urls import path
 from django.conf.urls import include
-
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
+from . import api_views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'), # just include the class name to make generic
@@ -14,5 +15,17 @@ urlpatterns = [
     path('saved/', views.saved, name='saved'),
 
     path('accounts/', include('django.contrib.auth.urls')),
+
+    path('records_api/', api_views.RecordList.as_view()), 
+
+    path('records_api/<int:pk>/', api_views.RecordDetail.as_view()),
+
+    path('contacts_api/', api_views.ContactList.as_view()),
+
+     path('relationships_api/', api_views.RelationshipList.as_view()),
+
+
 ]
 
+
+urlpatterns = format_suffix_patterns(urlpatterns)
