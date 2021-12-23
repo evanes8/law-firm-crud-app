@@ -15,25 +15,28 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 class RecordSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model=Record
-        fields=['matter_ref', 'code', 'matter_no', 'county', 'staff', 'property', 
+        fields=['id', 'matter_ref', 'code', 'matter_no', 'county', 'staff', 'property', 
                 'lot_no', 'purchase', 'downpay']
 
 class ContactSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model=Contact
-        fields=['name', 'firm', 'phone', 'fax', 'email']
+        fields=['id', 'name', 'firm', 'phone', 'fax', 'email']
 
 
 
 class RelationshipSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     record=RecordSerializer()
     contact=ContactSerializer()
 
     class Meta:
         model = Record_Contact
-        fields = ['record', 'contact', 'is_client', 'role']
+        fields = ['id', 'record', 'contact', 'is_client', 'role']
 
 #This works but record and contact need to be previusly created and unique based on their 
 #non primary key data. need to make it so on post, primary keys for the record and contact
@@ -46,3 +49,8 @@ class RelationshipSerializer(serializers.ModelSerializer):
         relationship=Record_Contact.objects.create(record=record, contact=contact, **validated_data)
         return relationship
 
+class NoRecordRelationshipSerializer(RelationshipSerializer):
+    
+    class Meta:
+        model=Record_Contact
+        fields=['id', 'contact', 'is_client', 'role']

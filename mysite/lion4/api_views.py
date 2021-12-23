@@ -1,5 +1,5 @@
 from .models import Record, Contact, Record_Contact
-from .serializers import RecordSerializer, ContactSerializer, RelationshipSerializer
+from .serializers import RecordSerializer, ContactSerializer, RelationshipSerializer, NoRecordRelationshipSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -93,4 +93,17 @@ class RelationshipList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class RelatedContactList(APIView):
+    def get_object(self, pk):
+        try:
+            return Record.objects.get(pk=pk)
+        except Record.DoesNotExist:
+            raise Http404
+   
+    def get(self, request, pk, format=None):
+        record = self.get_object(pk)
+        relationships=record.record_contact_set.all()
+        serializer = NoRecordRelationshipSerializer(relationships, many=True)
+        return Response(serializer.data)
 
