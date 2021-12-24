@@ -26,6 +26,8 @@ urlpatterns = [
 
     path('related_contacts_api/<int:pk>/', api_views.RelatedContactList.as_view()),
 
+    path('test/', views.test, name='test'),
+
 
 ]
 

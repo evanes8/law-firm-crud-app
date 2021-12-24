@@ -99,4 +99,5 @@ def saved(request):
     return render(request, 'lion4/saved.html')
 
 
-
+def test(request):
+    return render(request, 'lion4/test.html')
