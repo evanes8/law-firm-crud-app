@@ -64,6 +64,15 @@ class Standard_Record(models.Model):
     broker_firm = models.TextField(blank=True, default = my_default)
     broker_phone = models.TextField(blank=True, default = my_default)
     broker_email= models.TextField(blank=True, default = my_default)
+    sellers_broker=models.TextField(blank=True, default = my_default)
+    sellers_broker_firm=models.TextField(blank=True, default = my_default)
+    sellers_broker_phone=models.TextField(blank=True, default = my_default)
+    sellers_broker_email=models.TextField(blank=True, default = my_default)
+    date_opened=models.DateField(blank=True, null=True)
+
+
+
+
 
 
 
