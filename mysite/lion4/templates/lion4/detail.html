@@ -21,6 +21,7 @@
 {% if record %}
 
 <div class= "container py-lg-5">
+{{record.date_opened|date:"D d M Y"}}
 <form action="{% url 'detail' record.id %}" method="post" id="my_form">
     {% csrf_token %}
     <div class="row justify-content-end">
@@ -46,9 +47,6 @@
         {{ form.county|as_crispy_field }}
       </div>
       <div class="col-sm-5">
-        {{ form.staff|as_crispy_field }}
-      </div>
-      <div class="col-sm-5">
         {{ form.client|as_crispy_field }}
       </div>
     </div>
@@ -62,12 +60,6 @@
       </div>
       <div class="col-sm-6">
         {{ form.lot_no|as_crispy_field }}
-      </div>
-      <div class="col-sm-6">
-        {{ form.purchase|as_crispy_field }}
-      </div>
-      <div class="col-sm-6">
-        {{ form.downpay|as_crispy_field }}
       </div>
     </div>
 
@@ -155,6 +147,24 @@
       </div>
 
     </div>
+
+
+
+    <h3>Seller Broker</h3>
+    <div class="row">
+     <div class="col-sm-6">
+        {{ form.sellers_broker|as_crispy_field }}
+      </div>
+      <div class="col-sm-6">
+        {{ form.sellers_broker_firm|as_crispy_field }}
+      </div>
+      <div class="col-sm-6">
+        {{ form.sellers_broker_phone|as_crispy_field }}
+      </div>
+      <div class="col-sm-6">
+        {{ form.sellers_broker_email|as_crispy_field }}
+      </div>
+
 
     <input type="submit" value="Submit" id="submit_btn">
 
