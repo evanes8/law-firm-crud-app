@@ -8,7 +8,7 @@ from .forms import InputForm
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+import datetime
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = '/lion/accounts/login/'
     template_name= 'lion4/index.html'
@@ -78,7 +78,8 @@ def add(request):
 
             for field in form.cleaned_data.keys():
                setattr(new_record, field, form.cleaned_data[field])
-           
+            
+            new_record.date_opened=datetime.date.today() 
             new_record.save()
 
             # redirect to a new URL:
